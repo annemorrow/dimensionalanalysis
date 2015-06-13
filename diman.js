@@ -120,9 +120,11 @@ function del(deleteButton) {
   var factorDivs = document.getElementById("factors").children;
   var removeDiv = deleteButton.parentElement;
   for (var i = 0; i < factorDivs.length; i++) {
+    var frac = getFractionFromHTML(factorDivs[i]);
     if (factorDivs[i] !== removeDiv) {
-      var frac = getFractionFromHTML(factorDivs[i]);
       newFactorList.push(frac);
+    } else {
+      multiply(frac.reciprical());
     }
   }
   factorList = newFactorList;
