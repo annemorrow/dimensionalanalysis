@@ -90,7 +90,7 @@ function invert(elembutton) {
 function populateList(listName, array) {
   var el = document.getElementById(listName);
   for (var i = 0; i < array.length; i++) {
-    var str = array[i].htmlString();
+    var str = "<div>" + array[i].htmlString() + "</div>";
     str += "<div class='buttonbox'>";
     str += "<button class='invert' onclick='invert(this)'></button>";
     str += "<button class='add' onlick=add(this)></button>";
