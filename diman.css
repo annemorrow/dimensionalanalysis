@@ -1,0 +1,49 @@
+.number {
+  float: left;
+}
+
+.unit {
+  float: left;
+  margin-left: 8px;
+}
+
+.numerator, .denominator {
+  overflow: hidden;
+}
+
+.numerator {
+  border-bottom: solid;
+  border-width: 1px;
+}
+
+.denominator {
+  border-top: solid;
+  border-width: 1px;
+}
+
+.fraction {
+  width: 120px;
+  margin-bottom: 20px;
+  float:left;
+}
+
+.type {
+  float: left;
+  margin: 0px 70px;
+  width: 210px;
+}
+
+button {
+  width: 40px;
+  height: 40px;
+  background-color:green;
+  margin-left:5px;
+}
+
+.buttonbox {
+  float:right;
+}
+
+.invert {
+  background-image: url("invertarrowsred.png");
+}
