@@ -5,7 +5,7 @@ function Fraction(numeratorNumber, numeratorUnit, denominatorNumber, denominator
   this.denominatorUnit = denominatorUnit;
   
   this.reciprical = function() {
-    var inverse = new fraction(denominatorNumber, denominatorUnit, numeratorNumber, numeratorUnit);
+    var inverse = new Fraction(denominatorNumber, denominatorUnit, numeratorNumber, numeratorUnit);
     return inverse;
     }
   
@@ -30,13 +30,14 @@ function addFraction(fraction, elementID) {
 }
 
 function getFractionFromHTML(fractionElement) {
-  var numerator = fractionElement.getElementByTagName("numerator");
-  var numeratorNumber = Number(numerator.getElementByTagName("number"));
-  var numeratorUnit = numerator.getElementByTagName("unit");
-  var denominator = fractionElement.getElementByTagName("denominator");
-  var denominatorNumber = Number(denominator.getElementByTagName("number"));
-  var denominatorUnit = denominator.getElementByTagName("unit");
-  return new Fraction(numeratorNumber, numeratorUnit, denominatorNumber, denominatorUnit);
+  var numerator = fractionElement.getElementsByClassName("numerator")[0];
+  var numeratorNumber = Number(numerator.getElementsByClassName("number")[0].innerHTML);
+  var numeratorUnit = numerator.getElementsByClassName("unit")[0].innerHTML;
+  var denominator = fractionElement.getElementsByClassName("denominator")[0];
+  var denominatorNumber = Number(denominator.getElementsByClassName("number")[0].innerHTML);
+  var denominatorUnit = denominator.getElementsByClassName("unit")[0].innerHTML;
+  var frac = new Fraction(numeratorNumber, numeratorUnit, denominatorNumber, denominatorUnit);
+  return frac;
 }
 
 
@@ -48,7 +49,7 @@ var millimetersmeters = new Fraction(1000, "millimeters", 1, "meters");
 var centermetersmeters = new Fraction(100, "centimeters", 1, "meters");
 var decimetersmeters = new Fraction(10, "decimeters", 1, "meters");
 var dekametersmeters = new Fraction(1, "dekameters", 10, "meters");
-var kilometersmeters = new Fraction(1, "kilometer", 1000, "meters");
+var kilometersmeters = new Fraction(1, "kilometers", 1000, "meters");
 
 var inchesfeet = new Fraction(12, "inches", 1, "feet");
 var feetyards = new Fraction(3, "feet", 1, "yards");
@@ -77,13 +78,21 @@ var secondsminutes = new Fraction (1, "minutes", 60, "seconds");
 
 var times = [daysyears, hoursdays, minuteshours, secondsminutes];
 
+function invert(elembutton) {
+  var el = elembutton.parentElement.previousSibling; // should be the fraction;
+  var original = getFractionFromHTML(el);
+  console.log(original);
+  var inverted = original.reciprical();
+  el.innerHTML = inverted.htmlString();
+}
+
 
 function populateList(listName, array) {
   var el = document.getElementById(listName);
   for (var i = 0; i < array.length; i++) {
     var str = array[i].htmlString();
     str += "<div class='buttonbox'>";
-    str += "<button class='invert' onclick=invert(this)></button>";
+    str += "<button class='invert' onclick='invert(this)'></button>";
     str += "<button class='add' onlick=add(this)></button>";
     str += "</div>"
     el.innerHTML += str;
