@@ -184,7 +184,7 @@ function makeUnitStrings() {
       }
     }
     if (answer.units[unit] < 0) {
-      answer.denomUnitString += unit + " ";
+      answer.denomUnitString += " " + unit;
       if (answer.units[unit] < -1) {
         answer.denomUnitString += "<sup>" + -answer.units[unit] + "</sup>";
       }
