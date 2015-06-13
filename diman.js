@@ -87,6 +87,7 @@ function add(addButton) {
   var frac = getFractionFromHTML(el);
   factorList.push(frac);
   populateFactorList();
+  multiply(frac);
 }
 
 
@@ -135,4 +136,44 @@ populateList("distances", distances);
 populateList("volumes", volumes);
 
 populateList("times", times);
+
+
+
+
+var answer = {
+  number: 1,
+  units: {},
+  numUnitString: "",
+  denomUnitString: ""
+};
+
+function multiply(fraction) {
+  answer.number *= (fraction.numeratorNumber / fraction.denominatorNumber);
+  var numUnitValue = answer.units[fraction.numeratorUnit] || 0;
+  numUnitValue += 1;
+  answer.units[fraction.numeratorUnit] = numUnitValue;
+  var denomUnitValue = answer.units[fraction.denominatorUnit] || 0;
+  denomUnitValue -= 1;
+  answer.units[fraction.denominatorUnit] = denomUnitValue;
+  makeUnitStrings();
+}
+
+function makeUnitStrings() {
+  answer.numUnitString = "";
+  answer.denomUnitString = "";
+  for (var unit in answer.units) {
+    if (answer.units[unit] > 0) {
+      answer.numUnitString += unit + " ";
+      if (answer.units[unit] > 1) {
+        answer.numUnitString += "<div class='exp'>" + answer.units[unit] + "</div>";
+      }
+    }
+    if (answer.units[unit] < 0) {
+      answer.denomUnitString += unit + " ";
+      if (answer.units[unit] < -1) {
+        answer.denomUnitString += "<div class='exp'>" + -answer.units[unit] + "</div>";
+      }
+    }
+  }
+}
  
