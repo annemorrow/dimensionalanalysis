@@ -66,3 +66,22 @@ button {
 #factors .fraction {
   float: none;
 }
+
+#result {
+  float: left;
+  margin: 15px;
+}
+
+#result .number {
+  float: left;
+  margin: 15px;
+}
+
+#result .unitBlock {
+  float: right;
+}
+
+.symbol {
+  float: left;
+  margin-top: 24px;
+}

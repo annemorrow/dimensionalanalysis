@@ -129,6 +129,7 @@ function del(deleteButton) {
   }
   factorList = newFactorList;
   populateFactorList();
+  answer.display();
 }
 
 
@@ -146,7 +147,17 @@ var answer = {
   number: 1,
   units: {},
   numUnitString: "",
-  denomUnitString: ""
+  denomUnitString: "",
+  htmlString: function() {
+    var str = "<div class='number'>" + this.number + "</div>";
+    str += "<div class='unitBlock'><div class='numerator' class='unit'>" + this.numUnitString + "</div>";
+    str += "<div class='denominator' class='unit'>" + this.denomUnitString + "</div></div>";
+    return str;
+  },
+  display: function() {
+    var el = document.getElementById("result");
+    el.innerHTML = this.htmlString();
+  }
 };
 
 function multiply(fraction) {
@@ -158,6 +169,7 @@ function multiply(fraction) {
   denomUnitValue -= 1;
   answer.units[fraction.denominatorUnit] = denomUnitValue;
   makeUnitStrings();
+  answer.display();
 }
 
 function makeUnitStrings() {
@@ -165,15 +177,15 @@ function makeUnitStrings() {
   answer.denomUnitString = "";
   for (var unit in answer.units) {
     if (answer.units[unit] > 0) {
-      answer.numUnitString += unit + " ";
+      answer.numUnitString += " " + unit;
       if (answer.units[unit] > 1) {
-        answer.numUnitString += "<div class='exp'>" + answer.units[unit] + "</div>";
+        answer.numUnitString += "<sup>" + answer.units[unit] + "</sup>";
       }
     }
     if (answer.units[unit] < 0) {
       answer.denomUnitString += unit + " ";
       if (answer.units[unit] < -1) {
-        answer.denomUnitString += "<div class='exp'>" + -answer.units[unit] + "</div>";
+        answer.denomUnitString += "<sup>" + -answer.units[unit] + "</sup>";
       }
     }
   }
