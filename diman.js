@@ -109,7 +109,7 @@ function populateFactorList() {
   var el = document.getElementById("factors");
   el.innerHTML = "";
   for (var i = 0; i < factorList.length; i++) {
-    var str = "<div class='factor'>" + factorList[i].htmlString() + "<button class='delete' onclick='del(this)'></button></div>";
+    var str = "<div class='factor'>" + factorList[i].htmlString() + "<button class='delete' onclick='del(this)'></button></div><div class='symbol'>&times</div>";
     el.innerHTML += str;
   }
 }
@@ -117,7 +117,7 @@ function populateFactorList() {
 function del(deleteButton) {
   console.log("delete pressed");
   var newFactorList = [];
-  var factorDivs = document.getElementById("factors").children;
+  var factorDivs = document.getElementById("factors").getElementsByClassName('factor');
   var removeDiv = deleteButton.parentElement;
   for (var i = 0; i < factorDivs.length; i++) {
     var frac = getFractionFromHTML(factorDivs[i]);
@@ -125,7 +125,7 @@ function del(deleteButton) {
       newFactorList.push(frac);
     } else {
       multiply(frac.reciprical());
-    }
+    } 
   }
   factorList = newFactorList;
   populateFactorList();
@@ -157,6 +157,7 @@ var answer = {
   display: function() {
     var el = document.getElementById("result");
     el.innerHTML = this.htmlString();
+    document.getElementById('factors').lastChild.innerHTML = "=";
   }
 };
 
