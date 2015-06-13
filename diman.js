@@ -108,9 +108,24 @@ function populateFactorList() {
   var el = document.getElementById("factors");
   el.innerHTML = "";
   for (var i = 0; i < factorList.length; i++) {
-    var str = "<div class='factor'>" + factorList[i].htmlString() + "<button class='delete' onclick='delete(this)'></button></div>";
+    var str = "<div class='factor'>" + factorList[i].htmlString() + "<button class='delete' onclick='del(this)'></button></div>";
     el.innerHTML += str;
   }
+}
+
+function del(deleteButton) {
+  console.log("delete pressed");
+  var newFactorList = [];
+  var factorDivs = document.getElementById("factors").children;
+  var removeDiv = deleteButton.parentElement;
+  for (var i = 0; i < factorDivs.length; i++) {
+    if (factorDivs[i] !== removeDiv) {
+      var frac = getFractionFromHTML(factorDivs[i]);
+      newFactorList.push(frac);
+    }
+  }
+  factorList = newFactorList;
+  populateFactorList();
 }
 
 

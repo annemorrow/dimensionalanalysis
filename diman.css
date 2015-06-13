@@ -49,7 +49,7 @@ button {
 }
 
 #equation {
-  height: 100px;
+  height: 110px;
   margin: 15 px;
 }
 .factor {
@@ -58,8 +58,11 @@ button {
 }
 .delete {
   height: 18px;
-  width: 18px;
-  border-radius: 9px;
+  width: 36px;
+  border-radius: 6px;
   background-color: red;
-  float: right;
+}
+
+#factors .fraction {
+  float: none;
 }
