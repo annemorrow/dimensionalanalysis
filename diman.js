@@ -24,11 +24,6 @@ function Fraction(numeratorNumber, numeratorUnit, denominatorNumber, denominator
   
 }
 
-function addFraction(fraction, elementID) {
-  var el = document.getElementById(elementID);
-  el.innerHTML += fraction.htmlString();
-}
-
 function getFractionFromHTML(fractionElement) {
   var numerator = fractionElement.getElementsByClassName("numerator")[0];
   var numeratorNumber = Number(numerator.getElementsByClassName("number")[0].innerHTML);
@@ -86,6 +81,14 @@ function invert(elembutton) {
   el.innerHTML = inverted.htmlString();
 }
 
+function add(addButton) {
+  console.log("button pressed");
+  var el = addButton.parentElement.previousSibling;
+  var frac = getFractionFromHTML(el);
+  factorList.push(frac);
+  populateFactorList();
+}
+
 
 function populateList(listName, array) {
   var el = document.getElementById(listName);
@@ -93,11 +96,24 @@ function populateList(listName, array) {
     var str = "<div>" + array[i].htmlString() + "</div>";
     str += "<div class='buttonbox'>";
     str += "<button class='invert' onclick='invert(this)'></button>";
-    str += "<button class='add' onlick=add(this)></button>";
+    str += "<button class='add' onclick='add(this)'></button>";
     str += "</div>"
     el.innerHTML += str;
   }
 }
+
+var factorList = [];
+
+function populateFactorList() {
+  var el = document.getElementById("factors");
+  el.innerHTML = "";
+  for (var i = 0; i < factorList.length; i++) {
+    var str = "<div class='factor'>" + factorList[i].htmlString() + "<button class='delete' onclick='delete(this)'></button></div>";
+    el.innerHTML += str;
+  }
+}
+
+
 
 populateList("distances", distances);
 

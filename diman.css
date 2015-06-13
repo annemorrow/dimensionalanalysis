@@ -47,3 +47,19 @@ button {
 .invert {
   background-image: url("invertarrowsred.png");
 }
+
+#equation {
+  height: 100px;
+  margin: 15 px;
+}
+.factor {
+  float: left;
+  margin: 15px;
+}
+.delete {
+  height: 18px;
+  width: 18px;
+  border-radius: 9px;
+  background-color: red;
+  float: right;
+}
