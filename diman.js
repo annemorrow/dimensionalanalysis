@@ -149,7 +149,7 @@ var answer = {
   numUnitString: "",
   denomUnitString: "",
   htmlString: function() {
-    var str = "<div class='number'>" + this.number + "</div>";
+    var str = "<div class='number'>" + parseFloat((this.number).toFixed(10)) + "</div>";
     str += "<div class='unitBlock'><div class='numerator' class='unit'>" + this.numUnitString + "</div>";
     str += "<div class='denominator' class='unit'>" + this.denomUnitString + "</div></div>";
     return str;
