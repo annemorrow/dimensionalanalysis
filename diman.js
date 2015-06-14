@@ -94,11 +94,11 @@ function add(addButton) {
 function populateList(listName, array) {
   var el = document.getElementById(listName);
   for (var i = 0; i < array.length; i++) {
-    var str = "<div>" + array[i].htmlString() + "</div>";
+    var str = "<div class='factorbox'><div>" + array[i].htmlString() + "</div>";
     str += "<div class='buttonbox'>";
     str += "<button class='invert' onclick='invert(this)'></button>";
     str += "<button class='add' onclick='add(this)'></button>";
-    str += "</div>"
+    str += "</div></div>"
     el.innerHTML += str;
   }
 }
@@ -190,5 +190,20 @@ function makeUnitStrings() {
       }
     }
   }
+}
+
+
+var customUnits = [];
+
+function submitFactor() {
+  console.log("submit button hit");
+  var numeratorNumber = Number(document.getElementById("number1").value);
+  var numeratorUnit = document.getElementById("unit1").value;
+  var denominatorNumber = Number(document.getElementById("number2").value);
+  var denominatorUnit = document.getElementById("unit2").value;
+  var frac = new Fraction(numeratorNumber, numeratorUnit, denominatorNumber, denominatorUnit);
+  customUnits.push(frac);
+  document.getElementById("customList").innerHTML = "<h3>Custom Units</h3>";
+  populateList("customList", customUnits);
 }
  
